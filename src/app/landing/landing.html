@@ -1,0 +1,27 @@
+<div class="page-component">
+    <div class="page" scroll (scrollPosition)="scrollChanged($event)">
+        <div class="page-top-nav" id="navbar" [ngClass]="{'menu-fixed': navIsFixed }">
+            <div class="page-content">
+                <div class="nav-component">
+                    <div class="item logo">
+                        <img src="/app/resources/svg/logo.svg" alt="logo">
+                        <div class="app-name">ALVALAB</div>
+                    </div>
+                    <a *ngFor='let m of listMenus' href="{{ m.url }}">
+                        <div class="item clickable">
+                            {{ m.name }}
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <home></home>
+        <div *ngIf="showSupportPage">
+            <support></support>
+        </div>
+        <div class="page-footer">
+            .footer
+        </div>
+    </div>
+</div>

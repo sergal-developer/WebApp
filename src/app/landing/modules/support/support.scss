@@ -1,0 +1,31 @@
+.supportComponent {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 10px;
+    background: #e7d77e;
+    color: #333;
+    font-size: 15px;
+    z-index: 9999;
+    width: 500px;
+    text-align: center;
+    small {
+        color: rgb(97, 97, 97);
+    }
+    .log {
+        width: 90%;
+        font-size: 11px;
+        margin: 0 auto;
+        text-align: center;
+        .item {
+            float: left;
+            margin: 5px 0;
+            margin-left: 10px;
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+}

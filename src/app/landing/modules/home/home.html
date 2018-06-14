@@ -1,0 +1,37 @@
+<div id="home-component">
+    <div class="hero-content home">
+        <a name="home" class="link-name"></a>
+        <div class="hero-image">
+            <img src="/app/resources/svg/idea.svg" alt="idea">
+        </div>
+        <div class="hero-text">
+            <h1>Lorem ipsum dolor <span class="emphasis">sit amet</span>, consectetur adipiscing elit.</h1>
+            <p>In quis condimentum mauris, Sed ac viverra ligula.</p>
+
+            
+            <div class="hero-controls">
+                <login [hidden]="!showAutentication"></login>
+                <div class="button-application" (click)="toggleAuteticationPop()"> {{ labelButtonLogin }} </div>
+                <!-- <a href="/app">
+                </a> -->
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="hero-content">
+        <a name="how" class="link-name"></a>
+        <div class="marker">How it works</div>
+    </div>
+
+    <div class="hero-content gray">
+        <a name="watch" class="link-name"></a>
+        <div class="marker">Watch everything</div>
+    </div>
+
+    <div class="hero-content">
+        <a name="measure" class="link-name"></a>
+        <div class="marker">Measure consumption</div>
+    </div>
+
+</div>

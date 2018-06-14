@@ -1,0 +1,15 @@
+@import "../../common/_mixins";
+
+// @font-face {
+//     font-family: 'opensans';
+//     font-style: normal;
+//     font-weight: 400;
+//     src: url('./OpenSans-Regular.ttf') format('truetype');
+//   }
+
+@include font-face("opensans", "/resources/design/fonts/OpenSans/OpenSans-Regular", 500, normal, ttf);
+@include font-face("opensans-semi", "/resources/design/fonts/OpenSans/OpenSans-SemiBold", 500, normal, ttf);
+@include font-face("opensans-light", "/resources/design/fonts/OpenSans/OpenSans-Light", 500, normal, ttf);
+@include font-face("opensans-bold", "/resources/design/fonts/OpenSans/OpenSans-Bold", 500, normal, ttf);
+@include font-face("opensans-boldExtra", "/resources/design/fonts/OpenSans/OpenSans-ExtraBold", 500, normal, ttf);
+@include font-face("opensans-italic", "/resources/design/fonts/OpenSans/OpenSans-Italic", 500, normal, ttf);

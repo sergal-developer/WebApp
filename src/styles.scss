@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/theming';
-@import url('//fonts.googleapis.com/icon?family=Material+Icons');
+
 @include mat-core();
 
 $primary: mat-palette($mat-teal, 500);
@@ -11,10 +11,13 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
 
 body {
-    font-family: $mat-font-family;
+    font-family: 'opensans', sans-serif;
     font-weight: normal;
 }
 
 h1, h2, h3, h4 {
     font-weight: normal;
 }
+
+
+@import 'resources/design/design';

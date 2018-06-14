@@ -1,0 +1,220 @@
+/*---------------------------------*/
+$menu-width: 200px;
+$navbar-height: 50px; 
+
+// ================================================================= //
+//  Colors
+// ================================================================= //
+
+// NEUTRALS
+
+// darkest
+$neutral-0:  #222222 !default;
+
+// darker
+$neutral-1:  #272727 !default;
+
+// dark
+$neutral-2:  #333333 !default;
+
+// medium
+$neutral-3:  #666666 !default;
+
+// medium-2
+$neutral-4:  #767676 !default;
+
+// medium-3
+$neutral-5:  #BBBBBB !default;
+
+// medium-4
+$neutral-6:  #DADADA !default;
+
+// light
+$neutral-7:  #E5E5E5 !default;
+
+// lightest
+$neutral-8:  #F8F8F8 !default;
+
+//inverse
+$inverse: #FFFFFF !default;
+
+
+// TEXT COLORS
+
+// text color dark
+$text-color-dark:           $neutral-1 !default;
+
+// text color
+$text-color:                $neutral-2 !default;
+
+// text color medium
+$text-color-medium:         $neutral-3 !default;
+
+// text color light
+$text-color-light:          $neutral-4 !default;
+
+// text color inverse medium
+$text-color-inverse-medium: $neutral-5 !default;
+
+// navigation text color
+$text-color-inverse-light:  $neutral-7 !default;
+
+// text color inverse
+$text-color-inverse:        $inverse !default;
+
+
+// BORDER COLORS
+
+// border xdark
+$border-color-xdark:        scale-color($neutral-5, $lightness: -20%) !default;
+
+// border dark
+$border-color-dark:         scale-color($neutral-5, $lightness: -5%) !default;
+
+// border medium
+$border-color-medium:       scale-color($neutral-6, $lightness: -3%) !default;
+
+// border light
+$border-color-light:        $neutral-7 !default;
+
+// border white
+$border-color-inverse:      $neutral-8 !default;
+
+
+// BACKGROUND COLORS
+
+// navigation background
+$background-xdark:        $neutral-1 !default;
+
+// background dark
+$background-dark:         $neutral-2 !default;
+
+// background medium
+$background-medium:       $neutral-6 !default;
+
+// background light
+$background-light:        $neutral-8 !default;
+
+// background white
+$background-inverse:      $inverse !default;
+
+
+// --------------------------------------------
+//  branding colors - secondary - THESE ARE BEING PHASED OUT
+// --------------------------------------------
+
+$bb-secondary-color-1: #fb662b !default; // bright red-orange
+$bb-secondary-color-2: #c575d2 !default; // bright purple
+$bb-secondary-color-3: #fddd3b !default; // bright yellow
+$bb-secondary-color-4: #26d6fd !default; // bright blue
+
+// --------------------------------------------
+//  branding colors - tertiary - THESE ARE BEING PHASED OUT
+// --------------------------------------------
+
+$bb-tertiary-color-1: #ca423f !default; // red
+$bb-tertiary-color-2: #35a06a !default; // green
+$bb-tertiary-color-3: #1874a4 !default; // blue
+$bb-tertiary-color-4: #b7d153 !default; // lime green
+$bb-tertiary-color-5: #fbb034 !default; // orange
+$bb-tertiary-color-6: #c1977d !default; // skin tone dk
+$bb-tertiary-color-7: #fedcba !default; // skin tone lt
+
+// --------------------------------------------
+//  Foundation colors - THESE ARE BEING PHASED OUT
+// --------------------------------------------
+
+// primary
+$primary-color:      #1874a4 !default;
+$primary-color-lt:   scale-color($primary-color, $lightness: 15%) !default;
+$primary-color-dk:   scale-color($primary-color, $lightness: -20%) !default;
+
+// secondary
+//$secondary-color:    #d9d9d9 !default;
+$secondary-color:    $neutral-6 !default;
+$secondary-color-lt: scale-color($secondary-color, $lightness: 30%) !default;
+$secondary-color-dk: scale-color($secondary-color, $lightness: -15%) !default;
+
+// inverse
+$inverse-color:      $neutral-2 !default;
+$inverse-color-lt:   scale-color($inverse-color, $lightness: 15%) !default;
+$inverse-color-dk:   scale-color($inverse-color, $lightness: -20%) !default;
+
+
+// --------------------------------------------
+//  Accent colors
+// --------------------------------------------
+
+// primary accent color
+$primary-accent-color: #c56fd5 !default;
+$primary-accent-color-lt:   scale-color($primary-accent-color, $lightness: 15%) !default;
+$primary-accent-color-dk:   scale-color($primary-accent-color, $lightness: -20%) !default;
+
+// secondary accent color
+$secondary-accent-color: #2075a3 !default;
+$secondary-accent-color-lt:   scale-color($secondary-accent-color, $lightness: 15%) !default;
+$secondary-accent-color-dk:   scale-color($secondary-accent-color, $lightness: -20%) !default;
+
+// success
+$success-color:      #39e379 !default;
+$success-color-lt:   scale-color($success-color, $lightness: 15%) !default;
+$success-color-dk:   scale-color($success-color, $lightness: -20%) !default;
+
+// caution
+$caution-color:      #ffe300 !default;
+$caution-color-lt:   scale-color($caution-color, $lightness: 15%) !default;
+$caution-color-dk:   scale-color($caution-color, $lightness: -20%) !default;
+
+// warning
+$warning-color:      #ff6600 !default;
+$warning-color-lt:   scale-color($warning-color, $lightness: 15%) !default;
+$warning-color-dk:   scale-color($warning-color, $lightness: -20%) !default;
+
+// alert
+$alert-color:        #ff3b30 !default;
+$alert-color-lt:     scale-color($alert-color, $lightness: 15%) !default;
+$alert-color-dk:     scale-color($alert-color, $lightness: -20%) !default;
+
+// --------------------------------------------
+//  Targeted colors
+// --------------------------------------------
+
+// text color
+$text-color:         $neutral-2 !default;
+$text-on-color:      #222222 !default; // use when text appears on color for accessibility reasons
+$text-color-inverse: $inverse !default;
+$text-color-positive:       #008730 !default;
+$text-color-negative:       #cc413a !default;
+
+// anchor colors - these are Foundation variables being redefined here to make things easier
+$anchor-font-color: #2075a3 !default;
+$anchor-font-color-hover: #1a5e82 !default;
+
+// focus color
+$focus-color: #c56fd5 !default;
+
+// GUIDANCE/FTUE
+$guidance-color: $neutral-2 !default; // Background
+
+// ERROR
+$error-color:       #ff3b30 !default;
+$error-color-text:  #cc413a !default;
+
+// GRADE COLORS
+$grade-color-good:    #39e379 !default;
+$grade-color-pass:    #ffe300 !default;
+$grade-color-warning: #ff9600 !default;
+$grade-color-severe:  #ff6600 !default;
+$grade-color-fail:    #ff3b30 !default;
+
+// COURSE COLORS
+$course-color-1: #c473d4;
+$course-color-2: #2fd9fc;
+$course-color-3: #ffe12b;
+$course-color-4: #ff6417;
+$course-color-5: #89f3db;
+$course-color-6: #fe5b91;
+$course-color-7: #85f472;
+$course-color-8: #22c7cc;
+$course-color-9: #ca22ad; // needs white text color
+$course-color-10: #157afb; // needs white text color

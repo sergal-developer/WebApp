@@ -1,0 +1,36 @@
+<div class="login-component">
+    <div class="login-header">
+        <div class="login-header-text">
+            Login
+        </div>
+        <!-- <div class="login-header-close">
+            <button type="button" class="button-close" mat-button color="primary" >
+                <i class="pe-7s-close"></i>
+            </button>
+        </div> -->
+    </div>
+    <div class="form">
+        <div class="field full" *ngIf="showWarning">
+            <div class="message warning">
+                <i class="pe-7s-attention"></i> {{ showWarning }}
+            </div>
+        </div>
+        <div class="field">
+            <mat-form-field class="field full user-input">
+                <input matInput placeholder="Glober / User Name" [(ngModel)]="userName" [disabled]="waitMode" >
+            </mat-form-field>
+
+            <button type="button" class="login-fake-login" mat-raised-button color="primary" (click)="fakeAuth()">
+                <i class="pe-7s-angle-right" *ngIf="!waitMode"></i>
+                <i class="pe-7s-refresh-2 pe-spin" *ngIf="waitMode"></i>
+            </button>
+        </div>
+
+        <div class="field full">
+            <button type="button" class="google-login" mat-raised-button disabled (click)="googleAuth()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Google-favicon-2015.png" alt="">
+                Sign in with Google
+            </button>
+        </div>
+    </div>
+</div>

@@ -15,6 +15,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { D3Service, D3_DIRECTIVES } from './d3';
 import { GraphComponent } from './visuals/graph/graph.component';
 import { SHARED_VISUALS } from './visuals/shared';
+import { LandingModule } from './landing/landing.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { SHARED_VISUALS } from './visuals/shared';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    NgxChartsModule
+    NgxChartsModule,
+
+    LandingModule
   ],
   providers: [D3Service],
   bootstrap: [AppComponent]

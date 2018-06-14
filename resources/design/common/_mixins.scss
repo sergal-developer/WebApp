@@ -1,0 +1,135 @@
+@mixin blur($origin) {
+  -webkit-filter: blur($origin);
+  -moz-filter: blur($origin);
+  -o-filter: blur($origin);
+  filter: blur($origin);
+}
+
+@mixin box-shadow($expression) {
+  -webkit-box-shadow: $expression;
+  -moz-box-shadow: $expression;
+  -o-box-shadow: $expression;
+  box-shadow: $expression;
+}
+
+@mixin radius($expression) {
+   -webkit-border-radius: $expression;
+   -moz-border-radius: $expression;
+   border-radius: $expression;
+}
+
+@mixin rotate($d) {
+  -webkit-transform: rotate($d);
+  -moz-transform: rotate($d);
+  -ms-transform: rotate($d);
+  -o-transform: rotate($d);
+  transform: rotate($d);
+}
+
+@mixin flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin box-direction($expression){
+  -webkit-box-direction: $expression;
+  -moz-box-direction: $expression;
+  -ms-box-direction: $expression;
+  box-direction: $expression;
+}
+
+@mixin flex-direction($expression){
+  -webkit-flex-direction: $expression;
+  -moz-flex-direction: $expression;
+  -ms-flex-direction: $expression;
+  flex-direction: $expression;
+}
+
+@mixin box-orient($expression){
+  -webkit-box-orient: $expression;
+  -moz-box-orient: $expression;
+  -ms-box-orient: $expression;
+  box-orient: $expression;
+}
+
+@mixin flex-flow($expression){
+  -webkit-flex-flow: $expression;
+  -moz-flex-flow: $expression;
+  -ms-flex-flow: $expression;
+  flex-flow: $expression;
+}
+
+@mixin gradient-color($start, $end) {
+    /* para mas patrones gradiantes visitar: http://colorzilla.com/gradient-editor/#1e5799+0,7db9e8+100 */
+    background: -moz-linear-gradient(top,  $start 0%, $end 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  $start 0%, $end 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  $start 0%, $end 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$start', endColorstr='$end',GradientType=0 ); /* IE6-9 */
+}
+
+// #div1 {transition-timing-function: linear;}
+// #div2 {transition-timing-function: ease;}
+// #div3 {transition-timing-function: ease-in;}
+// #div4 {transition-timing-function: ease-out;}
+// #div5 {transition-timing-function: ease-in-out;}
+@mixin transition($property, $time, $func: null, $delay: null) {
+    -webkit-transition: $property $time $func $delay;
+    -moz-transition: $property $time $func $delay;
+    -o-transition: $property $time $func $delay;
+    transition: $property $time $func $delay;
+}
+
+@mixin scale($value) {
+  -webkit-transform: scale($value);  /* Chrome, Opera 15+, Safari 3.1+*/ 
+      -ms-transform: scale($value);  /* IE 9 */
+          transform: scale($value);  /* Firefox 16+, IE 10+, Opera*/ 
+}
+
+// =============================================================================
+// String Replace
+// =============================================================================
+
+@function str-replace($string, $search, $replace: "") {
+	$index: str-index($string, $search);
+
+	@if $index {
+		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+	}
+
+	@return $string;
+}
+
+// =============================================================================
+// Font Face
+// =============================================================================
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+	$src: null;
+
+	$extmods: (
+		eot: "?",
+		svg: "#" + str-replace($name, " ", "_")
+	);
+
+	$formats: (
+		otf: "opentype",
+		ttf: "truetype"
+	);
+
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
+
