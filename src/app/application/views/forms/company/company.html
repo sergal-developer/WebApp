@@ -1,0 +1,23 @@
+<div class="companyForm">
+    <div class="form">
+
+      <mat-form-field class="field full">
+        <input matInput placeholder="Name" [(ngModel)]="model.name">
+        <div class="error-field" [innerHTML]="validationFields.name"></div>
+      </mat-form-field>
+  
+      <mat-form-field class="field full">
+        <input matInput placeholder="Code" [(ngModel)]="model.code">
+        <div class="error-field" [innerHTML]="validationFields.code"></div>
+      </mat-form-field>
+  
+      <div class="field full ">
+        <button mat-raised-button type="button" (click)="submit()">Submit</button>
+      </div>
+  
+      <div class="field full">
+        {{ errorLog }}
+      </div>
+  
+    </div>
+</div>

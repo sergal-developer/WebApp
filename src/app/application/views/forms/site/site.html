@@ -1,0 +1,41 @@
+<div class="siteForm">
+    <div class="form">
+
+      <mat-form-field class="field full">
+        <input matInput placeholder="Key" [(ngModel)]="model.key">
+        <div class="error-field" [innerHTML]="validationFields.key"></div>
+      </mat-form-field>
+  
+      <mat-form-field class="field full">
+        <input matInput placeholder="Name" [(ngModel)]="model.name">
+        <div class="error-field" [innerHTML]="validationFields.name"></div>
+      </mat-form-field>
+
+      <mat-form-field class="field full">
+        <mat-select placeholder="Country" [(ngModel)]="model.idcountry">
+          <mat-option *ngFor="let cn of countries" [value]="cn.idcountry">
+            {{ cn.name }}
+          </mat-option>
+        </mat-select>
+        <div class="error-field" [innerHTML]="validationFields.idcountry"></div>
+      </mat-form-field>
+      
+      <mat-form-field class="field full">
+          <mat-select placeholder="Company" [(ngModel)]="model.idcompany">
+            <mat-option *ngFor="let cn of companies" [value]="cn.idcompany">
+              {{ cn.name }}
+            </mat-option>
+          </mat-select>
+          <div class="error-field" [innerHTML]="validationFields.idcompany"></div>
+        </mat-form-field>
+
+      <div class="field full ">
+        <button mat-raised-button type="button" (click)="submit()">Submit</button>
+      </div>
+  
+      <div class="field full">
+        {{ errorLog }}
+      </div>
+  
+    </div>
+</div>

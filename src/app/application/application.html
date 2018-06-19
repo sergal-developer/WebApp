@@ -1,0 +1,71 @@
+<div class="webapp">
+    <div class="component-menu" *ngIf="menus">
+        <!-- <div class="component-menu-item logo" [@logoAnimation]="menus.length"> -->
+        <div class="component-menu-item logo">
+            <div class="item-text">
+                ALVA
+                <div class="beta">Beta</div>
+                <div class="item-icon">
+                    <svg-item icon="logo" size="36"></svg-item>
+                </div>
+            </div>
+        </div>
+        <!-- <a [routerLink]="[m.url]" *ngFor='let m of menus' [@menuAnimation]="menus.length"> -->
+        <a [routerLink]="[m.url]" *ngFor='let m of menus'>
+            <div class="component-menu-item">
+                <div class="item-icon">
+                    <i class="{{ m.icon }}"></i>
+                </div>
+                <div class="item-text">{{ m.name }}</div>
+            </div>
+        </a>
+    </div>
+    <div class="component-content">
+        <div class="component-header-bar">
+            <div class="item-header title">{{ globals.title }}</div>
+
+            <div class="item-header separator vertical"></div>
+            <div class="item-header search" *ngIf="false">
+                <div class="search-box">
+                    <svg-item icon="search" size="24"></svg-item>
+
+                    <mat-form-field class="example-form-field">
+                        <input matInput type="text" placeholder="Find site..." [(ngModel)]="value" />
+                        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="item-header separator vertical" *ngIf="false"></div>
+            <div class="item-header filters" *ngIf="false">
+                Showing data for:
+                <div class="date-mixed-button">
+                    <!-- <svg-item icon="calendar" size="24"></svg-item> -->
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="dp3" disabled>
+                        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div class="item-header separator vertical" *ngIf="false"></div>
+            <div class="item-header user" >
+                <button mat-button (click)="logOut()" style="min-width: 0px; width: 32px; padding:  0; float: right; font-size: 20px;">
+                    <i class="pe-7s-power"></i>
+                </button>
+            </div>
+
+            
+            <div class="item-header user" >
+                <avatar [user]="globals.currentUser" [role]="globals.currentRole"></avatar>
+            </div>
+            
+            
+        </div>
+        <div class="component-views" [@routerAnimation]="getRouteAnimation(route)">
+            <router-outlet #route="outlet"></router-outlet>
+        </div>
+    </div>
+</div>

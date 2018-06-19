@@ -1,0 +1,90 @@
+.device-item-component {
+  min-width: 80px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  align-self: flex-start;
+  flex-basis: auto;
+
+  margin-top: 10px;
+  // background: #fff;
+  background: #fbfbfb;
+  box-shadow: 0 0 5px #bfbfbf;
+  border-radius: 10px;
+
+  font-size: 12px;
+  text-align: center;
+  // border: 1px solid #c2c2c2;
+  border-top: none;
+  border-bottom: none;
+  border-right: none;
+  padding: 7px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  .item-room-name {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .item-device-name { }
+  .item-device-icon {
+    font-size: 20px;
+    display: inline-block;
+  }
+  .item-device-value {
+    font-size: 25px;
+    display: inline-block;
+    span {
+      font-size: 11px;
+      margin-top: 6px;
+      float: right;
+    }
+  }
+
+  .deviceType {
+    border-radius: 5px;
+    &.TEMPERATURE {
+      color: #eb925e;
+      // color: #fff;
+      .count { color: #d07038; }
+    }
+    &.LIGHT {
+      color: #DEC4A1;
+      // color: #fff;
+      .count { color: #c99a5c; }
+    }
+    &.WATTS {
+      color: rgb(226, 224, 100);
+      // color: #000;
+      .count { color: rgb(226, 224, 100); }
+    }
+    &.HUMIDITY {
+      color: #A9E1BF;
+      // color: #000;
+      .count { color: #71be90; }
+    }
+    &.PREASURE {
+      color: #82B6C7;
+      // color: #fff;
+      .count { color: #5ea6be; }
+    }
+    &.ELECTRICITY {
+      color:#ded61d;
+      // color: #000;
+      .count { color: #b1ab19; }
+    }
+    &.INFRARED {
+      color: #e06363;
+      // color: #fff;
+      .count { color: #b33434; }
+    }
+    &.WATER {
+      color: #138098;
+      // color: #fff;
+      .count { color: #0e5464; }
+    }
+  }
+}
+  

@@ -1,0 +1,72 @@
+<div class="component-view-fix-header"></div>
+<div class="component-views-content">
+
+    <div class="notification-ui">
+        <div class="notification-menu">
+            <div class="header">Device Management</div>
+            <div class="subheader">
+                <!-- <mat-form-field>
+                    <mat-select placeholder="Filter">
+                        <mat-option *ngFor="let f of filter" [value]="f.value">
+                        {{ f.text }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+            </div>
+            <div class="collection-items" *ngIf="notifications">
+                <div class="item table" *ngFor="let n of notifications" (click)="getDetails(n)">
+                    <div class="cell">
+                        <div class="user">
+                            <avatar [user]="n.user" [showDescription]="false" ></avatar>
+                        </div>
+                    </div>
+                    <div class="cell">
+                        <div class="description" [innerHTML]="n.description"></div>
+                    </div>
+                    <div class="cell">
+                        <div class="state {{ n.stateName }}">{{ n.stateName }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="notification-details" *ngIf="currentNotif">
+
+            <div class="notif-date"> {{ currentNotif.updatedAt | date: 'dd/MM/yyyy' }}</div>
+            <div class="notif-title"> {{ currentNotif.typeName }} of device {{ currentNotif.device.name }} </div>
+            <div class="notif-status">
+                <div class="state {{ currentNotif.stateName }}">{{ currentNotif.stateName }}</div>
+            </div>
+
+            <div class="notif-details">
+                <div class="text" [innerHTML]="currentNotif.description">
+                    
+                </div>
+                <div class="breadcrumb">
+                    <div class="item" *ngIf="currentNotif.site">{{ currentNotif.site.name }}</div>
+                    <div class="item" *ngIf="currentNotif.floor">{{ currentNotif.floor.name }}</div>
+                    <div class="item" *ngIf="currentNotif.room">{{ currentNotif.room.name }}</div>
+                </div>
+                
+                <div class="device-details" *ngIf="currentNotif.device">device details</div>
+
+                <div class="map-details" *ngIf="currentNotif.room && currentNotif.device">
+                    <div class="map-device" 
+                        [style.margin-top]="safeStyle(currentNotif.device.mapping.y)"
+                        [style.margin-left]="safeStyle(currentNotif.device.mapping.x)">
+                        {{ currentNotif.device.name }}</div>
+                    <img class="map-room"
+                        [attr.src]="currentNotif.room.map.url" 
+                        [attr.width]="currentNotif.room.map.height"
+                        [attr.height]="currentNotif.room.map.height" alt="">
+                </div>
+
+                <div class="actions">
+                    <button mat-raised-button> Take Task </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+</div>

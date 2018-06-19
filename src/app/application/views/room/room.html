@@ -1,0 +1,123 @@
+<div class="component-view-fix-header"></div>
+<div class="component-views-content" *ngIf="room">
+    <div class="floors-list devices-l">
+        <div class="item title">{{ room.name }}</div>
+        <div class="item">
+            <button mat-raised-button (click)="openDevicePanel()">Add Device!</button>
+        </div>
+        <div class="item device" *ngFor="let d of devices">
+            <div class="device-name">{{ d.name }}
+            </div>
+            <div class="device-value">{{ d.value }}</div>
+            <div class="device-type">{{ getDeviceTypeName(d.idtype) }}</div>
+        </div>
+    </div>
+    <div class="floors-content devices-l">
+        <div class="maps-container" *ngIf="room && devices" >
+            <div class="map-header-title">Room Map | <span>{{ room.name }}</span></div>
+            <div class="map-header-actions">
+                    <button type="button" mat-raised-button (click)="unblockMap()" [disabled]="mapBlocked">Edit Map</button>
+                    <button type="button" mat-raised-button (click)="saveChangesMap()" [disabled]="!mapBlocked" >Save Changes</button>
+                    <button type="button" mat-raised-button (click)="discardChangesMap()" [disabled]="!mapBlocked" >Cancel</button>
+            </div>
+            <div class="map-viewer room" >
+                <svg id="map-container-component-room-svg"
+                    [ngClass]="{'edit-mode-room': mapBlocked }"
+                    [attr.width]="room.map.width" 
+                    [attr.height]="room.map.height" 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    xmlns:x="http://www.w3.org/1999/xlink">
+                    <style>
+                        use {
+                            user-select: none;
+                            cursor: pointer;
+                        }
+                        use[disabled] {
+                            cursor: default
+                        }
+                        path {
+                            fill: #069;
+                            user-select: none;
+                        }
+                        text {
+                            fill: #069;
+                            font-size: 12px;
+                            user-select: none;
+                        }
+                    </style>
+                    <defs>
+                        <svg:g *ngFor="let d of devices" [id]="'device-' + d.iddevice">
+                            <text x="18" y="12" >{{ d.name }}</text>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="16" height="16" viewBox="0 0 32.00 32.00" xml:space="preserve">
+                                <path fill="#000000" fill-opacity="1" stroke-linejoin="round" d="M 19.182,14.6858C 20.0614,13.8064 20.5012,12.7449 20.5012,11.5012C 20.5012,10.2576 20.0614,9.19688 19.182,8.31908C 18.3026,7.44133 17.2419,7.00243 16,7.00243C 14.7581,7.00243 13.6973,7.44133 12.8177,8.31908C 11.9384,9.19688 11.4985,10.2576 11.4985,11.5012C 11.4985,12.7449 11.9384,13.8056 12.8177,14.6833C 13.6973,15.5611 14.7581,16 16,16C 17.2419,16 18.3026,15.5619 19.182,14.6858 Z M 25,11.5012C 25,12.7777 24.8064,13.8261 24.4192,14.6464L 18.0205,28.256C 17.8334,28.6399 17.5552,28.9433 17.1863,29.1665C 16.8171,29.3896 16.4216,29.5012 16,29.5012C 15.5781,29.5012 15.1829,29.3896 14.8137,29.1665C 14.4446,28.9433 14.1714,28.6399 13.9941,28.256L 7.58081,14.6464C 7.1936,13.8261 7,12.7777 7,11.5012C 7,9.0172 7.87842,6.8958 9.63562,5.13695C 11.3928,3.37816 13.5144,2.49876 16,2.49876C 18.4856,2.49876 20.6069,3.37816 22.3641,5.13695C 24.1215,6.8958 25,9.0172 25,11.5012 Z "/>
+                            </svg>
+                        </svg:g>
+                    </defs>
+
+                    <use id="map-base" [attr.href]="room.map.url + '#map'" [attr.x]="0" [attr.y]="0" disabled="true"/>
+                    <use *ngFor="let d of devices" 
+                        [id]="'device-use-' + d.iddevice"
+                        [attr.propid]="d.iddevice"
+                        [attr.href]="'#device-' + d.iddevice" 
+                        [attr.x]="d.mapping.x" 
+                        [attr.y]="d.mapping.y" />
+                </svg>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<panel  [show]="panelControl.show"
+        [size]="panelControl.size"
+        [type]="panelControl.type"
+        [title]="panelControl.title"
+        [subtitle]="panelControl.subtitle"
+        (doOpen)="doOpenPanel($event)"
+        (doClose)="doClosePanel($event)">
+    <div panelContent>
+        <device-form *ngIf="room && deviceTypes" [site]="site" [room]="room" [deviceTypes]="deviceTypes" (doSubmit)="onSubmitForm($event)"></device-form>
+    </div>
+</panel>
+
+<div class="panel window right" *ngIf="devicePanelOpen">
+    <div class="panel-close circular" (click)="togglePanelDevice()">x</div>
+    <div class="panel-header">
+        <div>Device | <span>{{ room.name }}</span></div>
+    </div>
+    <div class="panel-content">
+        <div class="form" *ngIf="room && site" (change)="updateTopic($event)">
+            
+            <mat-form-field class="field">
+                <input matInput placeholder="Device Name" [(ngModel)]="deviceModel.name">
+            </mat-form-field>
+
+            <div class="field">
+                <mat-form-field>
+                    <mat-select placeholder="Type" [(ngModel)]="deviceModel.idtype" (change)="updateTopic($event)">
+                        <mat-option *ngFor="let t of deviceTypes" [value]="t.iddevicetype">
+                            {{ t.type }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <mat-form-field class="field">
+                <input matInput placeholder="IP Address" [(ngModel)]="deviceModel.ip" disabled="disabled" >
+            </mat-form-field>
+            
+            <mat-form-field class="field">
+                <input matInput placeholder="Port" [(ngModel)]="deviceModel.port" disabled="disabled">
+            </mat-form-field>
+
+            <mat-form-field class="field full">
+                <input matInput placeholder="Topic" [(ngModel)]="deviceModel.topic" >
+            </mat-form-field>
+
+            <div class="field full">
+                <button type="button" mat-raised-button (click)="submitNewDevice()">Submit</button>
+            </div>
+
+        </div>
+    </div>
+</div>

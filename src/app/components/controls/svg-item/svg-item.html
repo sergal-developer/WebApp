@@ -1,0 +1,8 @@
+<div class="svg-item" [style]="imageStyle">
+    <img attr.src="{{ href }}" attr.alt="{{ title }}" attr.class="{{ className }}" *ngIf="isImage">
+    <svg attr.class="{{ className }}" *ngIf="href && !isImage" attr.width="{{width}}" attr.height="{{ height }}">
+        <title *ngIf="title">{{ title }}</title>
+        <desc *ngIf="description">{{ description }}</desc>
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" attr.xlink:href="{{ href }}" />
+    </svg>
+</div>

@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-// import { DataService } from '../../../components/services/services.data';
-// import { ServerDataService } from '../../../components/services/data/data';
-// import { AuthData } from '../../../components/services/security/auth.data';
-// import { Globals } from '../../../components/services/globals/globals';
-// import { Router, Routes } from '@angular/router';
-// import { User, UserInformation, Role } from '../../../components/models/models';
-// import { CookieService } from 'ngx-cookie';
+import { DataService } from '../../../components/services/services.data';
+import { ServerDataService } from '../../../components/services/data/data';
+import { AuthData } from '../../../components/services/security/auth.data';
+import { Globals } from '../../../components/services/globals/globals';
+import { Router, Routes } from '@angular/router';
+import { User, UserInformation, Role } from '../../../components/models/models';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -22,27 +22,26 @@ export class LoginComponent implements OnInit {
     private waitMode: boolean;
 
     constructor(
-      // private data: ServerDataService,
-      // private authData: AuthData,
-      // private globals: Globals,
-      // private router: Router
-    ) {
+      private data: ServerDataService,
+      private authData: AuthData,
+      private globals: Globals,
+      private router: Router) {
     }
     // Properties
 
     // Functions
     ngOnInit() {
-      // this.checkUserSession();
+      this.checkUserSession();
     }
 
     public googleAuth() {
       console.log('Not available');
-      // this.authData.googleAuth();
+      this.authData.googleAuth();
     }
-    /*
+
     public fakeAuth() {
       this.waitMode = true;
-      if(this.validate()) {
+      if (this.validate()) {
         this.authData.fakeAuth(this.userName)
         .then((u: User) => {
           if (u) {
@@ -78,5 +77,4 @@ export class LoginComponent implements OnInit {
         this.fakeAuth();
       }
     }
-    */
 }

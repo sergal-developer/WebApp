@@ -1,0 +1,63 @@
+<div class="userForm">
+    <div class="form">
+      <mat-form-field class="field full">
+        <input matInput placeholder="User Name" [(ngModel)]="model.userInformation.username">
+        <div class="error-field" [innerHTML]="validationFields.username"></div>
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <input matInput placeholder="Given Name" [(ngModel)]="model.userInformation.givenName">
+        <div class="error-field" [innerHTML]="validationFields.givenName"></div>
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <input matInput placeholder="Middle Name" [(ngModel)]="model.userInformation.middleName">
+        <div class="error-field" [innerHTML]="validationFields.middleName"></div>
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <input matInput placeholder="Family Name" [(ngModel)]="model.userInformation.familyName">
+        <div class="error-field" [innerHTML]="validationFields.familyName"></div>
+      </mat-form-field>
+
+      <mat-form-field class="field full">
+        <input matInput placeholder="Email" [(ngModel)]="model.userInformation.email">
+        <div class="error-field" [innerHTML]="validationFields.email"></div>
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <mat-select placeholder="Country" [(ngModel)]="model.userInformation.location">
+          <mat-option *ngFor="let cn of countries" [value]="cn.idcountry">
+            {{ cn.name }}
+          </mat-option>
+        </mat-select>
+        <div class="error-field" [innerHTML]="validationFields.location"></div>
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <mat-select placeholder="Role" [(ngModel)]="rolesSelected" multiple (change)="onChangeRole($event)">
+          <mat-option *ngFor="let cn of roles" [value]="cn">
+            {{ cn.name }}
+          </mat-option>
+        </mat-select>
+        <div class="error-field" [innerHTML]="validationFields.roles"></div>
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <mat-select placeholder="Sites" [(ngModel)]="model.userInformation.sitesView" multiple [disabled]="!showSites">
+          <mat-option *ngFor="let cn of sites" [value]="cn.idsite">
+            {{ cn.name }}
+          </mat-option>
+        </mat-select>
+        <div class="error-field" [innerHTML]="validationFields.sitesView"></div>
+      </mat-form-field>
+
+      <div class="field full ">
+        <button mat-raised-button type="button" (click)="submit()">Submit</button>
+      </div>
+  
+      <div class="field full">
+        {{ errorLog }}
+      </div>
+    </div>
+  </div>

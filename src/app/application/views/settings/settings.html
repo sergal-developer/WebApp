@@ -1,0 +1,240 @@
+<div class="settings-view" *ngIf="dataLoading">
+  <div class="component-view-fix-header"></div>
+ 
+  <panel  [show]="panelControl.show"
+          [size]="panelControl.size"
+          [type]="panelControl.type"
+          [title]="panelControl.title"
+          [subtitle]="panelControl.subtitle"
+          (doOpen)="doOpenPanel($event)"
+          (doClose)="doClosePanel($event)">
+    <div panelContent>
+      <site-form *ngIf="showFormSite" [companies]="companyCollection" [countries]="countryCollection" (doSubmit)="onSubmitForm($event)"></site-form>
+      <user-form *ngIf="showFormUser" [countries]="countryCollection" [sites]="sitesCollection" [roles]="rolesCollection" (doSubmit)="onSubmitForm($event)"></user-form>
+      <device-type-form *ngIf="showFormDeviceType" (doSubmit)="onSubmitForm($event)"></device-type-form>
+      <country-form *ngIf="showFormCountry" (doSubmit)="onSubmitForm($event)"></country-form>
+    </div>
+  </panel>
+
+
+        
+  <div class="component-views-content">
+    <h2>Sites</h2>
+    <button mat-raised-button (click)="openSitePanel($event)">Add Site</button>
+    <hr>
+    <div class="mat-elevation-z8" *ngIf="sitesCollection">
+      <mat-table #tableSites [dataSource]="sitesCollection">
+
+        <ng-container matColumnDef="idsite">
+          <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.idsite}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="key">
+          <mat-header-cell *matHeaderCellDef> Key </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.key}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="countryName">
+          <mat-header-cell *matHeaderCellDef> Country </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.countryName}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+    </div>
+  </div>
+
+  <div class="component-views-content">
+    <h2>Users</h2>
+    <button mat-raised-button (click)="openUserPanel($event)">Add User</button>
+    <hr>
+    <div class="mat-elevation-z8" *ngIf="usersCollection">
+      <mat-table #tableUsers [dataSource]="usersCollection">
+
+        <ng-container matColumnDef="iduser">
+          <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.iduser}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="username">
+          <mat-header-cell *matHeaderCellDef> username </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.userInformation.username}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> email </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.userInformation.email}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumnsUsers"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumnsUsers;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+
+  <div class="component-views-content">
+    <h2>Device Types</h2>
+    <button mat-raised-button (click)="openDeviceTypePanel($event)">Add Device Type</button>
+    <hr>
+    <div class="mat-elevation-z8" *ngIf="deviceTypesCollection">
+      <mat-table #tableDeviceTypes [dataSource]="deviceTypesCollection">
+
+        <ng-container matColumnDef="iddevicetype">
+          <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.iddevicetype}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef> type </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="prefix">
+          <mat-header-cell *matHeaderCellDef> prefix </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.prefix}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="color">
+          <mat-header-cell *matHeaderCellDef> color </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.color}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumnsDeviceTypes"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumnsDeviceTypes;"></mat-row>
+      </mat-table>
+
+    </div>
+  </div>
+
+  <div class="component-views-content">
+    <h2>Country</h2>
+    <button mat-raised-button (click)="openCountryPanel($event)">Add Country</button>
+    <hr>
+    <div class="mat-elevation-z8" *ngIf="globals.countries">
+      <mat-table #tableCountry [dataSource]="globals.countries">
+
+        <ng-container matColumnDef="idcountry">
+          <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.idcountry}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="code">
+          <mat-header-cell *matHeaderCellDef> code </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.code}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumnsCountry"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumnsCountry;"></mat-row>
+      </mat-table>
+
+    </div>
+  </div>
+
+  <div class="panel window right" *ngIf="panelSite">
+    <div class="panel-close circular" (click)="togglePanelSite()">x</div>
+    <div class="panel-header">
+      <div>New Site</div>
+    </div>
+    <div class="panel-content">
+      <div class="form">
+        <mat-form-field class="field full">
+          <input matInput placeholder="Site Key" [(ngModel)]="siteModel.key">
+        </mat-form-field>
+
+        <mat-form-field class="field">
+          <input matInput placeholder="Site Name" [(ngModel)]="siteModel.name">
+        </mat-form-field>
+
+        <mat-form-field class="field">
+          <mat-select placeholder="Country" [(ngModel)]="siteModel.idcountry">
+            <mat-option *ngFor="let cn of globals.countries" [value]="cn.idcountry">
+              {{ cn.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="field full error-type" *ngIf="errorsField.length">
+          {{ errorsField }}
+        </div>
+        <div class="field full ">
+          <button mat-raised-button type="button" (click)="submitSite()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel window right" *ngIf="userPanelOpen">
+    <div class="panel-close circular" (click)="togglePanelUser()">x</div>
+    <div class="panel-header">
+      <div>New User</div>
+    </div>
+    <div class="panel-content">
+      <div class="form">
+        <mat-form-field class="field full">
+          <input matInput placeholder="User Name" [(ngModel)]="userModel.userInformation.username">
+        </mat-form-field>
+        <mat-form-field class="field">
+          <input matInput placeholder="Given Name" [(ngModel)]="userModel.userInformation.givenName">
+        </mat-form-field>
+        <mat-form-field class="field">
+          <input matInput placeholder="Middle Name" [(ngModel)]="userModel.userInformation.middleName">
+        </mat-form-field>
+        <mat-form-field class="field">
+          <input matInput placeholder="Family Name" [(ngModel)]="userModel.userInformation.familyName">
+        </mat-form-field>
+        <mat-form-field class="field full">
+          <input matInput placeholder="Email" [(ngModel)]="userModel.userInformation.email">
+        </mat-form-field>
+
+        <mat-form-field class="field">
+          <mat-select placeholder="Country" [(ngModel)]="userModel.userInformation.location">
+            <mat-option *ngFor="let cn of globals.countries" [value]="cn.idcountry">
+              {{ cn.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="field">
+          <mat-select placeholder="Role" [(ngModel)]="userModel.userInformation.roles" multiple>
+            <mat-option *ngFor="let cn of rolesCollection" [value]="cn.idrole">
+              {{ cn.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="field full">
+          {{ userModel | json }}
+        </div>
+
+        <div class="field full error-type" *ngIf="errorsField.length">
+          {{ errorsField }}
+        </div>
+        <div class="field full ">
+          <button mat-raised-button type="button" (click)="newUser()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

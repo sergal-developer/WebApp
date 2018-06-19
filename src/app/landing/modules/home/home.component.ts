@@ -9,11 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class HomeComponent implements OnInit {
-
+  public labelButtonLogin: String = 'Enter the app';
   public showAutentication: boolean;
     constructor() { }
     // Functions
-    public labelButtonLogin: String = 'Enter the app';
     ngOnInit() { }
 
     toggleAuteticationPop() {

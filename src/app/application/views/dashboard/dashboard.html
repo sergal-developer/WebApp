@@ -1,0 +1,14 @@
+<div class="component-view-fix-header"></div>
+<div class="component-views-content">
+
+    <div style="overflow: hidden;" *ngIf="sites && dataLoading">
+        <tile *ngFor="let s of sites" 
+            [id]="s.xid" [site]="s" [selected]="s.selected"
+            (onBeforeActive)="onBeforeActiveTile($event)"
+            (onBeforeInactive)="onBeforeInactiveTile($event)"></tile>
+    </div>
+    
+    <!-- <breadcrumb></breadcrumb>
+    <card></card>
+    <table></table> -->
+</div>

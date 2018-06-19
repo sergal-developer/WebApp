@@ -1,0 +1,70 @@
+.avatar-component {
+  .avatar {
+    .avatar-description {
+      float: left;
+      font-size: 13px;
+      line-height: 15px;
+      padding: 5px 10px;
+      border-right: 1px solid #dedede;
+      height: 40px;
+      margin-right: 10px;
+      text-align: right;
+      .avatar-user-name { text-transform: capitalize; }
+      .avatar-user-role {
+        text-transform: uppercase;
+        font-family: 'OpenSansBold';
+        line-height: 20px; 
+      }
+
+      &.name {
+        line-height: 40px;
+        padding-top: 0;
+      }
+
+      &.role {
+        line-height: 40px;
+        padding-top: 0;
+        .avatar-user-role {
+          line-height: 40px;
+        }
+      }
+
+      &.user-role { line-height: 15px; }
+    }
+    
+    .avatar-badge {
+      background: gray;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 25px;
+      text-align: center;
+      display: inline-block;
+
+      .initials {
+        line-height: 40px;
+        text-align: center;
+      }
+
+      .avatar-image {
+        width: inherit;
+        height: inherit;
+        img {
+          width: inherit;
+          height: auto;
+          border-radius: 25px;
+        }
+      }
+    }
+  }
+  &.right {
+    .avatar-description {
+      float: right !important;
+      border: none;
+      border-left: 1px solid #dedede;
+      border-right: none !important;
+      margin-left: 10px;
+      text-align: left !important;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<div class="avatar-component {{ style }}" *ngIf="user">
+    <div class="avatar single">
+        <div class="avatar-description" 
+            [ngClass]="{'name': showUsername && !showRole, 'role': showRole && !showUsername, 'user-role': showUsername && showRole }"
+            *ngIf="showDescription">
+            <div class="avatar-user-name" *ngIf="showUsername" [innerHTML]="getName()"></div>
+            <div class="avatar-user-role" *ngIf="showRole && role">{{ role.name }}</div>
+        </div>    
+        <div class="avatar-badge">
+            <div class="initials" *ngIf="!validateBadge()" [innerHTML]="getInitials()"></div>
+            <div class="avatar-image" *ngIf="validateBadge()">
+                <img [attr.src]="user.userInformation.picture" alt="avatar">
+            </div>
+        </div>
+    </div>
+</div>

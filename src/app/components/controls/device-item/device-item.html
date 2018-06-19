@@ -1,0 +1,9 @@
+<div class="device-item-component " *ngIf="dataLoading">
+    <div class="item-room-name">{{ room.name }}</div>
+    
+    <div class="item-device-name deviceType {{ device.deviceType.type.toUpperCase() }}">{{ device.name }}</div>
+    <div class="item-device-icon"> 
+        <i class="{{ device.deviceType.icon }}"></i> 
+    </div>
+    <div class="item-device-value">{{ device.value }} <span>{{ device.deviceType.prefix }}</span> </div>
+</div>

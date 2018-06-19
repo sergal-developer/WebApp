@@ -4,25 +4,17 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-// import { MaterialModule } from '../angular.material';
-import { MatInputModule, MatButtonModule, MatSelectModule, MatIconModule } from '@angular/material';
+// import { MatInputModule, MatButtonModule, MatSelectModule, MatIconModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialModule } from '../angular.material';
+import { MaterialModule } from './material.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
-import { D3Service, D3_DIRECTIVES } from './d3';
-import { GraphComponent } from './visuals/graph/graph.component';
-import { SHARED_VISUALS } from './visuals/shared';
 import { LandingModule } from './landing/landing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GraphComponent,
-    ...SHARED_VISUALS,
-    ...D3_DIRECTIVES
   ],
   imports: [
     BrowserModule,
@@ -35,7 +27,7 @@ import { LandingModule } from './landing/landing.module';
 
     LandingModule
   ],
-  providers: [D3Service],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

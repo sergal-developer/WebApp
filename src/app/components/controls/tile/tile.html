@@ -1,0 +1,79 @@
+<div class="tile-component" [ngClass]="{ 'active': selected === true, 'inactive': selected === false }">
+    <div class="tile-background">
+    </div>
+    <div class="tile-content" id="{{ id }}">
+
+        <div class="tile-overlay">
+            See more
+            <i class="pe-7s-info"></i>
+        </div>
+
+        <div class="tile-header">
+            <div class="tile-title">{{ site.countryName }} |
+                <span>{{ site.name }}</span>
+            </div>
+            <div class="tile-header-actions">
+                <button mat-button class="edit" *ngIf="selected && AdminMode" [routerLink]="['/app/site/'+ site.key ]">
+                    <i class="pe-7s-edit"></i> Edit Site</button>
+                <div class="separator" *ngIf="selected"></div>
+                <button mat-button class="close" (click)="toggleActive()" *ngIf="selected">
+                    <i class="pe-7s-close"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="tile-body">
+            <div class="tile-section devices" *ngIf="existData">
+                <div *ngFor="let f of site.floors">
+                    <div ng-if="f.rooms" class="tile-item-stadistic">
+                        <div class="tile-title-floor">{{ f.name }}</div>
+                        <div class="devices-collection" *ngIf="getLinearDevices(f)">
+                            <device-item *ngFor="let d of getLinearDevices(f)" [device]="d" [room]="d.room"></device-item>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tile-section category" *ngIf="existData && selected">
+                <div class="item stadistic">
+                    <div class="stadistic-head">Floors</div>
+                    <div class="stadistic-subhead">device</div>
+                    <div class="stadistic-body">{{ _Floors.length }}</div>
+                </div>
+                <div class="item stadistic">
+                    <div class="stadistic-head">Rooms</div>
+                    <div class="stadistic-subhead">device</div>
+                    <div class="stadistic-body">{{ _Rooms.length }}</div>
+                </div>
+                <div class="item stadistic">
+                    <div class="stadistic-head">Devices</div>
+                    <div class="stadistic-subhead">device</div>
+                    <div class="stadistic-body">{{ _Devices.length }}</div>
+                </div>
+            </div>
+            <div class="tile-section category no-records" *ngIf="!existData">
+                <div class="item stadistic full">
+                    <div class="stadistic-head">Don't have any data record on this site </div>
+                </div>
+            </div>
+
+            <div class="tile-section tile-actions" *ngIf="!selected">
+                <button mat-raised-button color="primary" (click)="toggleActive()">Show Details</button>
+            </div>
+
+            <div class="tile-section" *ngIf="existData && selected && showDelayData">
+                <h4>Installed devices</h4>
+                <div class="item device {{ d }}" *ngFor="let d of _DevicesGroup">{{ d }}</div>
+            </div>
+
+            <div class="tile-section chart" *ngIf="existData && selected && showDelayData">
+                <h4>Statistics</h4>
+                
+                <ngx-charts-area-chart [view]="chart.view" [scheme]="chart.colorScheme" [results]="multi" [gradient]="chart.gradient" [xAxis]="chart.showXAxis"
+                    [yAxis]="chart.showYAxis" [legend]="chart.showLegend" [showXAxisLabel]="chart.showXAxisLabel" [showYAxisLabel]="chart.showYAxisLabel"
+                    [xAxisLabel]="chart.xAxisLabel" [yAxisLabel]="chart.yAxisLabel" [autoScale]="chart.autoScale">
+                </ngx-charts-area-chart>
+            </div>
+        </div>
+    </div>
+</div>

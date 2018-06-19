@@ -1,0 +1,42 @@
+<div class="deviceForm">
+  <div class="form" (change)="updateTopic($event)">
+
+    <mat-form-field class="field full">
+      <input matInput placeholder="Name" [(ngModel)]="model.name">
+      <div class="error-field" [innerHTML]="validationFields.name"></div>
+    </mat-form-field>
+
+    <mat-form-field class="field full">
+      <mat-select placeholder="Type" [(ngModel)]="model.idtype" (change)="updateTopic($event)">
+        <mat-option *ngFor="let t of deviceTypes" [value]="t.iddevicetype">
+          {{ t.type }}
+        </mat-option>
+      </mat-select>
+      <div class="error-field" [innerHTML]="validationFields.idtype"></div>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <input matInput placeholder="IP Address" [(ngModel)]="model.ip" disabled="disabled">
+      <div class="error-field" [innerHTML]="validationFields.ip"></div>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <input matInput placeholder="Port" [(ngModel)]="model.port" disabled="disabled">
+      <div class="error-field" [innerHTML]="validationFields.port"></div>
+    </mat-form-field>
+
+    <mat-form-field class="field full">
+      <input matInput placeholder="Topic" [(ngModel)]="model.topic">
+      <div class="error-field" [innerHTML]="validationFields.topic"></div>
+    </mat-form-field>
+
+    <div class="field full ">
+      <button mat-raised-button type="button" (click)="submit()">Submit</button>
+    </div>
+
+    <div class="field full">
+      {{ errorLog }}
+    </div>
+
+  </div>
+</div>

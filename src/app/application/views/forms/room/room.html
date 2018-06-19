@@ -1,0 +1,50 @@
+<div class="roomForm">
+  <div class="form">
+
+    <mat-form-field class="field full">
+      <input matInput placeholder="Name" [(ngModel)]="model.name">
+      <div class="error-field" [innerHTML]="validationFields.name"></div>
+    </mat-form-field>
+
+    <mat-form-field class="field full">
+      <mat-select placeholder="Map" [(ngModel)]="model.map">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let m of maps" [value]="m">
+            {{ m.name }}
+        </mat-option>
+      </mat-select>
+      <div class="error-field" [innerHTML]="validationFields.map"></div>
+    </mat-form-field>
+
+    <mat-form-field class="field full">
+      <mat-select placeholder="Floor" [(ngModel)]="model.idfloor">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let t of floors" [value]="t.idfloor">
+            {{ t.name }}
+        </mat-option>
+      </mat-select>
+      <div class="error-field" [innerHTML]="validationFields.idfloor"></div>
+    </mat-form-field>
+
+    <div class="field full" *ngIf="model.map">
+      <h3>Preview Map</h3>
+      <hr>
+      <div class="preview-svg">
+          <svg-item [path]="model.map.url" [width]="'333px'" [isImage]="true"></svg-item>
+      </div>
+      <div class="preview-svg-ghost">
+          <svg-item [path]="model.map.url" [isImage]="true"></svg-item>
+      </div>
+  </div>
+    
+
+    <div class="field full ">
+      <button mat-raised-button type="button" (click)="submit()">Submit</button>
+    </div>
+
+    <div class="field full">
+      {{ errorLog }}
+    </div>
+
+  </div>
+</div>

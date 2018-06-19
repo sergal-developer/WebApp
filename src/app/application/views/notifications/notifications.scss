@@ -1,0 +1,157 @@
+.notificationsComponent {
+    background: #f3f3f3;
+    color: #333;
+}
+
+.notification-ui {
+    width: 100%;
+    min-height: 80vh;
+
+    .notification-menu,
+    .notification-details {
+        // display: inline-block;
+        width: calc(60% - 4px);
+        min-height: inherit;
+        padding: 0 15px;
+        float: left;
+    }
+    .notification-menu {
+        border-right: 1px solid #cecece;
+        padding-left: 0px;
+        width: 40%;
+        .header { 
+            font-size: 22px;
+        }
+        .subheader { 
+            font-size: 16px;
+        }
+    }
+
+    .collection-items {
+        margin-top: 20px;
+        .item {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgb(146, 146, 146);
+            &.table {
+                display: table;
+                .cell {
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+            }
+
+            .user {
+                
+                margin-right: 10px;
+            }
+
+            .description {}
+        }
+    }
+
+    .state {
+        padding: 4px 5px;
+        background: #fff;
+        color: #333;
+        border: 1px solid #333;
+        margin-left: 10px;
+        font-size: 10px;
+        font-weight: 800;
+
+        &.PENDING {
+            background: #f5f5f5;
+            border-color: #FFD351;
+            color: #594319;
+        }
+        &.PROGRESS {
+            background: #FFD351;
+            border-color: #FFD351;
+            color: #594319;
+        }
+        &.HOLD {
+            background: #c1c1c1;
+            border-color: #c1c1c1;
+            color: #ffffff;
+        }
+        &.COMPLETED {
+            background: #14892C;
+            border-color: #14892C;
+            color: #ffffff;
+        }
+
+    }
+
+    .notification-details {
+        padding-top: 15px;
+        padding-right: 8px;
+        
+        .notif-date {
+            font-size: 12px;
+            margin-bottom: -7px;
+            margin-top: 20px;
+        }
+        .notif-title {
+            font-size: 27px;
+            text-transform: lowercase;
+        }
+        .notif-status {
+            overflow: hidden;
+            width: 100%;
+            margin: 15px 0 35px;
+            .state {
+                float: left;
+                margin-left: 0;
+            }
+        }
+        .notif-details {
+            font-size: 14px;
+            line-height: 27px;
+            .text {
+                margin-bottom: 10px;
+            }
+            .breadcrumb {
+                padding: 10px 0;
+                .item {
+                    display: inline-block;
+                    color: #83bee2;
+                    &:after {
+                        content: '/';
+                        margin: 0 5px;
+                    }
+                    &:last-child {
+                        
+                        &:after {
+                            content: '';
+                            margin-left: 0;
+                            margin-right: 0;
+                        }
+                    }
+                }
+            }
+            .site-details {}
+            .floor-details {}
+            .room-details {}
+            .device-details {}
+
+            .map-details {
+                margin-top: 10px;
+                .map-device {
+                    position: absolute;
+                    padding: 3px;
+                    background: #a4e5f1;
+                    font-size: 10px;
+                    padding: 0 9px;
+                    line-height: 20px;
+                    margin-left: 59px;
+                }
+                .map-room {}
+            }
+
+            .actions {
+                button {}
+            }
+        }
+    }
+}

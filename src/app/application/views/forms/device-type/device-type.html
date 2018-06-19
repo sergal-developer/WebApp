@@ -1,0 +1,28 @@
+<div class="deviceTypeForm">
+    <div class="form">
+
+      <mat-form-field class="field full">
+        <input matInput placeholder="Type" [(ngModel)]="model.type">
+        <div class="error-field" [innerHTML]="validationFields.type"></div>
+      </mat-form-field>
+  
+      <mat-form-field class="field full">
+        <input matInput placeholder="Prefix" [(ngModel)]="model.prefix">
+        <div class="error-field" [innerHTML]="validationFields.prefix"></div>
+      </mat-form-field>
+
+      <mat-form-field class="field full">
+        <input matInput placeholder="Color" [(ngModel)]="model.color">
+        <div class="error-field" [innerHTML]="validationFields.color"></div>
+      </mat-form-field>
+  
+      <div class="field full ">
+        <button mat-raised-button type="button" (click)="submit()">Submit</button>
+      </div>
+  
+      <div class="field full">
+        {{ errorLog }}
+      </div>
+  
+    </div>
+</div>

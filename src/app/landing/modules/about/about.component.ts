@@ -9,10 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AboutComponent implements OnInit {
-
-    constructor() { }
-    // Properties
-    public titleMenu: string;
+  // Properties
+  public titleMenu: string;
+  constructor() { }
     // Functions
     ngOnInit() { }
 }

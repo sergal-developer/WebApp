@@ -1,0 +1,182 @@
+<div class="component-view-fix-header"></div>
+<div class="component-views-content">
+    <div class="floors-list">
+        <div class="item title">Floors</div>
+        <div class="item">
+            <button mat-raised-button (click)="openFloorPanel()">Add Floor!</button>
+        </div> 
+        <div *ngIf="floors">
+            <div class="item" *ngFor="let f of floors">
+                <button mat-raised-button (click)="showRooms(f)">{{ f.name }}</button>
+            </div>
+        </div>
+    </div>
+    <div class="floors-content" *ngIf="(floors || currentRooms) && floors.length">
+        <div class="list-rooms">
+            <div class="item title">Rooms
+                <button mat-raised-button (click)="openRoomPanel()">Add Room!</button>
+            </div>
+            <div *ngIf="currentRooms">
+                <mat-tab-group *ngIf="currentRooms.length">
+                    <mat-tab label="{{ r.name }}" *ngFor="let r of currentRooms">
+                        <ng-template mat-tab-label>
+                            <div (click)="loadRoomProperties(r)">{{ r.name }}</div>
+                        </ng-template>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+        <div class="maps-container" *ngIf="currentFloor">
+            <div class="map-header-title">Floor Map | <span>{{ currentFloor.name }}</span></div>
+            <div class="map-header-actions">
+                    <button type="button" mat-raised-button (click)="unblockMap()" [disabled]="mapBlocked">Edit Map</button>
+                    <button type="button" mat-raised-button (click)="saveChangesMap()" [disabled]="!mapBlocked" >Save Changes</button>
+                    <button type="button" mat-raised-button (click)="discardChangesMap()" [disabled]="!mapBlocked" >Cancel</button>
+            </div>
+            <div class="map-viewer floor">
+                <svg id="map-container-component" [ngClass]="{'edit-mode': mapBlocked }"  width="500" height="500" xmlns="http://www.w3.org/2000/svg" xmlns:x="http://www.w3.org/1999/xlink">
+                    <style>
+                        use {
+                            user-select: none;
+                            cursor: pointer;
+                        }
+                        use[disabled] {
+                            cursor: default
+                        }
+                    </style>
+                    <use id="map-base" [attr.href]="currentFloor.map.url + '#map'" [attr.x]="0" [attr.y]="0" disabled="true"/>
+                    <use *ngFor="let r of currentRooms" 
+                            [id]="'map-' + r.idroom"
+                            [attr.prop-id]="r.idroom"
+                            [attr.href]="r.map.url + '#map'" 
+                            [attr.x]="r.map.x" [attr.y]="r.map.y"
+                            [attr.prop-width]="r.map.width" [attr.prop-height]="r.map.height" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="room-properties" *ngIf="roomPropertiesOpen && currentRoom">
+                <div class="botton-close circular" (click)="toggleRoomProperties()">x</div>
+            <div class="room-name">
+                Room {{ currentRoom.name }}
+            </div>
+            <div class="room-content">
+                <div *ngIf="currentRoom.devices.length">
+                    <div class="room-content-item" *ngFor="let d of currentRoom.devices">
+                        <div class="device-name">{{ d.name }}</div>
+                        <div class="device-type">{{ d.type }}</div>
+                    </div>
+                </div>
+                <div class="room-content-item" *ngIf="!currentRoom.devices.length">
+                    No have devices attached!
+                </div>
+            </div>
+            <div class="room-actions">
+                <button mat-raised-button [routerLink]="['/app/site/'+ siteKey + '/room/' + currentRoom.idroom ]">Go to Room</button>
+            </div>
+        </div>
+    </div>
+    <div class="floors-content" *ngIf="!currentRooms">
+        <div class="message">
+            There are no registered floors
+        </div>
+    </div>
+</div>
+
+<panel  [show]="panelControl.show"
+          [size]="panelControl.size"
+          [type]="panelControl.type"
+          [title]="panelControl.title"
+          [subtitle]="panelControl.subtitle"
+          (doOpen)="doOpenPanel($event)"
+          (doClose)="doClosePanel($event)">
+    <div panelContent>
+        <floor-form *ngIf="showFormFloor && site" [site]="site" [maps]="maps" (doSubmit)="onSubmitForm($event)"></floor-form>
+        <room-form *ngIf="showFormRoom && site" [floors]="floors" [maps]="maps" (doSubmit)="onSubmitForm($event)"></room-form>
+    </div>
+  </panel>
+
+<div class="panel window right scrollable" *ngIf="floorPanelOpen">
+    <div class="panel-close circular" (click)="closePanelFloor()">x</div>
+    <div class="panel-header">
+        <div>New Floor | <span>{{ floorModelTemp.name }}</span></div>
+    </div>
+    <div class="panel-content">
+        <div class="form">
+            <mat-form-field class="field">
+                <input matInput placeholder="Floor Name" [(ngModel)]="floorModelTemp.name">
+            </mat-form-field>
+
+            <mat-form-field class="field">
+                <mat-select placeholder="Map" [(value)]="floorModelTemp.map"> 
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let m of mapFiles" [value]="m">
+                        {{ m.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div class="field full" *ngIf="floorModelTemp.map">
+                <h3>Preview Map</h3>
+                <hr>
+                <div class="preview-svg">
+                    <svg-item [path]="floorModelTemp.map.url" [width]="'333px'" [isImage]="true"></svg-item>
+                </div>
+                <div class="preview-svg-ghost">
+                    <svg-item [path]="floorModelTemp.map.url" [isImage]="true"></svg-item>
+                </div>
+            </div>
+
+            <div class="field full">
+                <button type="button" mat-raised-button (click)="submitNewFloor()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel window right scrollable" *ngIf="roomPanelOpen && currentFloor">
+    <div class="panel-close circular" (click)="closePanelRoom()">x</div>
+    <div class="panel-header">
+        <div>New Room | <span>{{ roomModelTemp.name }}</span></div>
+    </div>
+    <div class="panel-content">
+        <div class="form" *ngIf="site && floors">
+
+            <mat-form-field class="field full">
+                <input matInput placeholder="Room Name" [(ngModel)]="roomModelTemp.name">
+            </mat-form-field>
+
+            <mat-form-field class="field">
+                <mat-select placeholder="Map" [(value)]="roomModelTemp.map">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let m of mapFiles" [value]="m">
+                        {{ m.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="field">
+                <mat-select placeholder="Floor" [(value)]="roomModelTemp.idfloor">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let t of floors" [value]="t.idfloor">
+                        {{ t.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <hr>
+            <div class="field full" *ngIf="roomModelTemp.map">
+                <p>Preview map</p>
+                <div class="preview-svg">
+                    <svg-item [path]="roomModelTemp.map.url"  [width]="'333px'" [isImage]="true"></svg-item>
+                </div>
+                <div class="preview-svg-ghost">
+                    <svg-item [path]="roomModelTemp.map.url" [isImage]="true"></svg-item>
+                </div>
+            </div>
+            <div class="field full">
+                <button type="button" mat-raised-button (click)="submitNewRoom()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="panel-component-overlay" *ngIf="enableOverlay && show"></div>
+<div class="panel-component {{ size }} {{ type }} " *ngIf="show" [ngClass]="{'header-enabled': showHeader && !showFooter, 'footer-enabled': showFooter && !showHeader, 'header-footer-enabled': showFooter && showHeader }">
+    <div class="panel-component-header" *ngIf="showHeader">
+        <div class="panel-component-header--title">
+            <span [innerHTML]="title"></span>
+            <span class="separator" *ngIf="subtitle"> </span>
+            <span class="subtitle" [innerHTML]="subtitle" *ngIf="subtitle"></span>
+        </div>
+        <div class="panel-component-header--close" *ngIf="showCloseHeader" (click)="onClose($event)">
+            <i class="pe-7s-close"></i>
+        </div>
+    </div>
+    <div class="panel-component-body">
+        <ng-content select="[panelContent]"></ng-content>
+    </div>
+    <div class="panel-component-footer" *ngIf="showFooter">
+        <button mat-raised-button>Cancel</button>
+        <button mat-raised-button color="primary">Save</button>
+    </div>
+</div>
