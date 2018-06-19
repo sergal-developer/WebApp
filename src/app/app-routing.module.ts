@@ -3,10 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Components
 import { LandingComponent } from './landing/landing.component';
+import { ApplicationComponent } from './application/application.component';
 
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
+  { path: 'app', component: ApplicationComponent }
 ];
 
 @NgModule({

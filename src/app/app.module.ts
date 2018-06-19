@@ -11,6 +11,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LandingModule } from './landing/landing.module';
+import { ApplicationModule } from './application/application.module';
+
+import { Configuration } from './components/services/globals/config';
+import { DataService } from './components/services/services.data';
+import { HttpHelper } from './components/services/http/http';
+import { ServerDataService } from './components/services/data/data';
+import { AuthData } from './components/services/security/auth.data';
 
 @NgModule({
   declarations: [
@@ -25,9 +32,10 @@ import { LandingModule } from './landing/landing.module';
     MaterialModule,
     NgxChartsModule,
 
-    LandingModule
+    LandingModule,
+    ApplicationModule
   ],
-  providers: [],
+  providers: [ Configuration, DataService, HttpHelper, ServerDataService, AuthData ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

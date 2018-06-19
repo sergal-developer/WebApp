@@ -22,6 +22,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CookieModule } from 'ngx-cookie';
 import { FormsModelModule } from './views/forms/forms.module';
 import { NotificationsModule } from './views/notifications/notifications.module';
+import { ServerDataService } from '../components/services/data/data';
 
 @NgModule ({
   imports: [ CommonModule,
@@ -45,6 +46,6 @@ import { NotificationsModule } from './views/notifications/notifications.module'
   ],
   declarations: [ ApplicationComponent ],
   exports: [ RouterModule ],
-  providers: [ Globals, WINDOW_PROVIDERS ]
+  providers: [ Globals, WINDOW_PROVIDERS, ServerDataService ]
 })
 export class ApplicationModule { }
