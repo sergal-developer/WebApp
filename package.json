@@ -4,10 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --output-path docs --base-href WEBAPP",
+    "build": "ng build --output-path docs --base-href /WebApp/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ng deploy"
+    "deploy": "ng deploy --base-href=/WebApp/"
   },
   "private": true,
   "dependencies": {
