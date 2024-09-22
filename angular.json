@@ -99,7 +99,6 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "https://sergal-developer.github.io/WebApp/",
             "buildTarget": "WebApp:build:production"
           }
         }
