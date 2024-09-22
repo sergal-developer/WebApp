@@ -98,7 +98,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "buildTarget": "test:build:production"
+            "buildTarget": "ALVA:build:production"
           }
         }
       }
