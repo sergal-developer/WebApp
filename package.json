@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ng deploy --base-href=https://sergal-developer.github.io/WebApp/"
+    "deploy": "ng deploy --dir=docs --base-href=/WebApp/"
   },
   "private": true,
   "dependencies": {

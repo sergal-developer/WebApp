@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ALVA": {
+    "WebApp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -15,11 +15,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/WebApp/",
             "outputPath": "docs",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -62,10 +63,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ALVA:build:production"
+              "buildTarget": "WebApp:build:production"
             },
             "development": {
-              "buildTarget": "ALVA:build:development"
+              "buildTarget": "WebApp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +74,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "ALVA:build"
+            "buildTarget": "WebApp:build"
           }
         },
         "test": {
@@ -98,7 +99,8 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "buildTarget": "ALVA:build:production"
+            "baseHref": "https://sergal-developer.github.io/WebApp/",
+            "buildTarget": "WebApp:build:production"
           }
         }
       }
